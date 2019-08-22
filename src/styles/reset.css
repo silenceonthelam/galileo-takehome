@@ -1,0 +1,71 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button {
+  -webkit-appearance: none;
+  -webkit-backface-visibility: hidden;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+button:hover,
+label:hover {
+	cursor: pointer;
+}
+
+select {
+  border: none;
+  color: inherit;
+  font: inherit;
+}
+
+ul {
+  margin: 0;
+  padding-left: 0;
+}
+
+li {
+  list-style: none;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+html,
+body,
+#root,
+.app {
+	height: 100%;
+	width: 100%;
+}
+
+html {
+  font-size: 62.5%;
+  overflow: hidden;
+}
+
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  overflow-y: scroll;
+}
+
+.app {
+  overflow: hidden;
+}
