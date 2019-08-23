@@ -5,30 +5,38 @@ import ModalWrap from './components/ModalWrap.jsx'
 import './styles/variables.css'
 import './styles/main.css'
 
+const BASE_API_URI = `https://testapi.io/api/akirayoglu/0/`
+
+function getTasks(providerId) {
+  return fetch(`${BASE_API_URI}tasks/${providerId}`)
+    .then(res => res.json())
+}
+
 class App extends Component {
   constructor(props) {
     super(props)
     this.state ={
       allProviders: [], // available?
       selectedProviders: [], // current?
+      tasks: {},
     }
     this.handleAddProvider = this.handleAddProvider.bind(this)
   }
   componentDidMount() {
+    //
     this.getDoctors()
   }
   getDoctors() {
-    fetch(`https://testapi.io/api/akirayoglu/0/reference/getDoctors`)
+    fetch(`${BASE_API_URI}reference/getDoctors`)
       .then(res => res.json())
       .then(result => {
-        console.log('result', result)
         this.setState({
           allProviders: result
         })
       }
     )
   }
-  handleAddProvider(providerId) {
+  async handleAddProvider(providerId) {
     console.log('handleAddProvider', providerId)
 
     const selectedProvider = this.state.allProviders.find(p =>
@@ -37,9 +45,18 @@ class App extends Component {
     const available = this.state.allProviders.filter(a =>
       a.doctor_id !== providerId)
 
+    const tasks = await getTasks(providerId)
+    console.log('tasks', tasks)
+
+    const newTasks = {
+      ...this.state.tasks,
+      [providerId]: tasks
+    }
+
     this.setState({
       allProviders: available,
       selectedProviders: this.state.selectedProviders.concat(selectedProvider),
+      tasks: newTasks
     })
 
   }
@@ -49,8 +66,11 @@ class App extends Component {
       state: {
         allProviders,
         selectedProviders,
+        tasks,
       }
     } = this
+
+    console.log('render tasks', tasks)
 
     return (
       <div className="app">
@@ -88,12 +108,12 @@ class App extends Component {
                   </h3>
 
                   <ul className="tasks">
-                    <li className="task">
-                      <span className="task__name">Task1</span>
-                      <span className="task__priority">
-                        1
-                      </span>
-                    </li>
+                    { tasks[sel.doctor_id].map(task =>
+                      <li className={ `task task-${task.priority}` } key={ task.task_id }>
+                        <span className="task__name">{ task.task_id }</span>
+                        <span className={ `priority priority-${task.priority}` }>{ task.priority }</span>
+                      </li>
+                    )}
                   </ul>
                 </li>
               )}
