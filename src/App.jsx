@@ -30,6 +30,14 @@ class App extends Component {
   }
   handleAddProvider(provider) {
     console.log('handleAddProvider', provider)
+
+    const selectedProvider = this.state.allProviders.find(p =>
+      p.doctor_id === provider)
+
+    this.setState({
+      selectedProviders: this.state.selectedProviders.concat(selectedProvider)
+    })
+
   }
   render() {
     const {
