@@ -9,8 +9,8 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state ={
-      allProviders: [],
-      selectedProviders: [],
+      allProviders: [], // available?
+      selectedProviders: [], // current?
     }
     this.handleAddProvider = this.handleAddProvider.bind(this)
   }
@@ -28,14 +28,18 @@ class App extends Component {
       }
     )
   }
-  handleAddProvider(provider) {
-    console.log('handleAddProvider', provider)
+  handleAddProvider(providerId) {
+    console.log('handleAddProvider', providerId)
 
     const selectedProvider = this.state.allProviders.find(p =>
-      p.doctor_id === provider)
+      p.doctor_id === providerId)
+
+    const available = this.state.allProviders.filter(a =>
+      a.doctor_id !== providerId)
 
     this.setState({
-      selectedProviders: this.state.selectedProviders.concat(selectedProvider)
+      allProviders: available,
+      selectedProviders: this.state.selectedProviders.concat(selectedProvider),
     })
 
   }
