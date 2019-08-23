@@ -15,6 +15,10 @@
   background-color: var(--mid-blue);
   transition: .35s;
 }
+.modal__trigger:disabled {
+  background-color: var(--faded-white);
+  cursor: default;
+}
 
 .modal__cover {
   background-color: rgba(0,0,0,.15);

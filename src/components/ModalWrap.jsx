@@ -37,6 +37,7 @@ class ModalWrap extends Component {
       <Fragment>
         <button
           className="modal__trigger"
+          disabled={ !allProviders.length }
           onClick={ onOpen }
         >
           Add Provider
