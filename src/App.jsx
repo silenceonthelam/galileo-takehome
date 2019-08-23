@@ -6,8 +6,39 @@ import './styles/variables.css'
 import './styles/main.css'
 
 class App extends Component {
-
+  constructor(props) {
+    super(props)
+    this.state ={
+      allProviders: [],
+      selectedProviders: [],
+    }
+    this.handleAddProvider = this.handleAddProvider.bind(this)
+  }
+  componentDidMount() {
+    this.getDoctors()
+  }
+  getDoctors() {
+    fetch(`https://testapi.io/api/akirayoglu/0/reference/getDoctors`)
+      .then(res => res.json())
+      .then(result => {
+        console.log('result', result)
+        this.setState({
+          allProviders: result
+        })
+      }
+    )
+  }
+  handleAddProvider(provider) {
+    console.log('handleAddProvider', provider)
+  }
   render() {
+    const {
+      handleAddProvider,
+      state: {
+        allProviders,
+        selectedProviders,
+      }
+    } = this
 
     return (
       <div className="app">
@@ -24,9 +55,10 @@ class App extends Component {
             <h2 className="page__header__title">
               Current Providers
             </h2>
-
-            <ModalWrap />
-
+            <ModalWrap
+              allProviders={ allProviders }
+              onAddProvider={ handleAddProvider }
+            />
           </header>
           <div className="providers">
             {/*
@@ -36,7 +68,25 @@ class App extends Component {
             */}
             <ul className="providers__list">
 
-              <li className="provider">
+              { selectedProviders.map(sel =>
+                <li className="provider" key={ sel.doctor_id }>
+
+                  <h3 className="provider__name">
+                    { sel.first_name }&nbsp;{ sel.last_name },&nbsp;{ sel.degree }
+                  </h3>
+
+                  <ul className="tasks">
+                    <li className="task">
+                      <span className="task__name">Task1</span>
+                      <span className="task__priority">
+                        1
+                      </span>
+                    </li>
+                  </ul>
+                </li>
+              )}
+
+              {/* <li className="provider">
                 <h3 className="provider__name">
                   Provider Name, MD
                 </h3>
@@ -132,7 +182,7 @@ class App extends Component {
                     </span>
                   </li>
                 </ul>
-              </li>
+              </li> */}
 
 
             </ul>

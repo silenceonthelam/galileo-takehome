@@ -1,23 +1,21 @@
 import React, { Component, Fragment } from 'react'
 import { createPortal } from 'react-dom'
 
-// import '../styles/modal.css'
-
 class Modal extends Component {
   constructor(props) {
     super(props)
-    this.handleAddItem = this.handleAddItem.bind(this)
+    this.handleAddProvider = this.handleAddProvider.bind(this)
     this.selectedOption = React.createRef()
   }
-  handleAddItem() {
-    // this.props.onAdd(this.selectedOption.current.value)
+  handleAddProvider() {
+    this.props.onAddProvider(this.selectedOption.current.value)
     this.props.onClose()
   }
   render() {
     const {
-      handleAddItem,
+      handleAddProvider,
       props: {
-        allItems,
+        allProviders,
         onClose,
       },
       selectedOption,
@@ -46,17 +44,25 @@ class Modal extends Component {
             <select
               className="modal__content__select"
               id="provider-search"
+              ref={ selectedOption }
             >
-              <option>Provider 1</option>
-              <option>Provider 2</option>
-              <option>Provider 3</option>
+              { allProviders.map(provider =>
+                <option
+                  className="selection__option"
+                  key={ provider.doctor_id }
+                  value={ provider.doctor_id }
+                >
+                  { provider.first_name }&nbsp;
+                  { provider.last_name },&nbsp;
+                  { provider.degree }
+                </option>
+              )}
             </select>
           </div>
-
           <footer className="modal__footer">
             <button
               className="modal__footer__btn"
-              onClick={ handleAddItem }
+              onClick={ handleAddProvider }
             >
               Add
             </button>

@@ -24,6 +24,10 @@ class ModalWrap extends Component {
     const {
       onClose,
       onOpen,
+      props: {
+        allProviders,
+        onAddProvider
+      },
       state: {
         isOpen
       }
@@ -40,6 +44,8 @@ class ModalWrap extends Component {
 
         { isOpen &&
           <Modal
+            allProviders={ allProviders }
+            onAddProvider={ onAddProvider }
             onClose={ onClose }
           />
         }
