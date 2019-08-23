@@ -1,0 +1,10 @@
+:root {
+  --black: #0d0a00;
+  --dark-blue: #0f1430;
+  --mid-blue: #2f60a0;
+  --white: #fff;
+  --yellow: #ffd040;
+  --yellow-lt: #ffeabf;
+  --yellow-10: rgba(255, 208, 64, 0.1);
+  --faded-white: #979ba6;
+}
