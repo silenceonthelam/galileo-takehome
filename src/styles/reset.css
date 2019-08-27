@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+:active,
+:focus {
+  outline: none;
+}
+
 button {
   -webkit-appearance: none;
   -webkit-backface-visibility: hidden;
@@ -67,5 +72,5 @@ body {
 }
 
 .app {
-  overflow: hidden;
+  /*overflow: hidden;*/
 }

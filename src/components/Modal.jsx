@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { createPortal } from 'react-dom'
 
+// NOTE: In actual app, content would not be tightly-coupled to modal
 class Modal extends Component {
   constructor(props) {
     super(props)

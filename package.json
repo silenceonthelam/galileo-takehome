@@ -1,13 +1,13 @@
 {
   "name": "galileo-takehome",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple app to view a list of providers and add them to another list.",
   "main": "index.js",
   "scripts": {
     "dev": "./node_modules/.bin/parcel index.html"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jessie Schalles",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.5.5",
